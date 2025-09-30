@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  nginx:
+    image: nginx:stable
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d   # 라우팅/SSL 설정
+    depends_on:
+      - auth-service
+      - user-service
+      - order-service
+      - inventory-service
+
+  auth-service:
+    image: sampoom/auth-service:latest
+    container_name: auth-service
+    env_file:
+      - ./env/.env.prod
+
+  user-service:
+    image: sampoom/user-service:latest
+    container_name: user-service
+    env_file:
+      - ./env/.env.prod
+
+  order-service:
+    image: sampoom/order-service:latest
+    container_name: order-service
+    env_file:
+      - ./env/.env.prod
+
+  inventory-service:
+    image: sampoom/inventory-service:latest
+    container_name: inventory-service
+    env_file:
+      - ./env/.env.prod
+

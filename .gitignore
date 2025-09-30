@@ -1,0 +1,12 @@
+env
+nginx/ssl/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+
+.gradle
+build/
