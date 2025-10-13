@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   nginx:
     image: nginx:stable
@@ -11,10 +9,12 @@ services:
       - ./nginx:/etc/nginx/conf.d   # 라우팅/SSL 설정
     depends_on:
       - auth-service
-      - inventory-service
+      - warehouse-service
       - agency-service
-#      - user-service
-#      - order-service
+      - user-service
+      - order-service
+      - material-service
+      - part-service
 
   auth-service:
     image: hysungzzang/sampoom:auth-latest
@@ -28,21 +28,32 @@ services:
     env_file:
       - ./env/.env.prod
 
-#  user-service:
-#    image: hysungzzang/sampoom:user-latest
-#    container_name: user-service
-#    env_file:
-#      - ./env/.env.prod
-
-#  order-service:
-#    image: hysungzzang/sampoom:order-latest
-#    container_name: order-service
-#    env_file:
-#      - ./env/.env.prod
-
-  inventory-service:
-    image: hysungzzang/sampoom:inventory-latest
-    container_name: inventory-service
+  user-service:
+    image: hysungzzang/sampoom:user-latest
+    container_name: user-service
     env_file:
       - ./env/.env.prod
 
+  order-service:
+    image: hysungzzang/sampoom:order-latest
+    container_name: order-service
+    env_file:
+      - ./env/.env.prod
+
+  warehouse-service:
+    image: hysungzzang/sampoom:warehouse-latest
+    container_name: warehouse-service
+    env_file:
+      - ./env/.env.prod
+
+  material-service:
+    image: hysungzzang/sampoom:material-latest
+    container_name: material-service
+    env_file:
+      - ./env/.env.prod
+
+  part-service:
+    image: hysungzzang/sampoom:part-latest
+    container_name: part-service
+    env_file:
+      - ./env/.env.prod
