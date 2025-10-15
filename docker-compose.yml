@@ -6,25 +6,40 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx:/etc/nginx/conf.d   # 라우팅/SSL 설정
+      - ./nginx:/etc/nginx/conf.d
+      - /etc/letsencrypt/live/sampoom.store/fullchain.pem:/etc/nginx/certs/fullchain.pem:ro
+      - /etc/letsencrypt/live/sampoom.store/privkey.pem:/etc/nginx/certs/privkey.pem:ro
     depends_on:
-      - auth-service
       - warehouse-service
       - agency-service
+      - factory-service
       - user-service
       - order-service
       - material-service
       - part-service
+      - swagger
 
-  auth-service:
-    image: hysungzzang/sampoom:auth-latest
-    container_name: auth-service
-    env_file:
-      - ./env/.env.prod
+  swagger:
+    image: hysungzzang/sampoom:swagger-latest
+    container_name: swagger
+    depends_on:
+      - order-service
+      - user-service
+      - warehouse-service
+      - factory-service
+      - agency-service
+      - part-service
+      - material-service
 
   agency-service:
     image: hysungzzang/sampoom:agency-latest
     container_name: agency-service
+    env_file:
+      - ./env/.env.prod
+
+  factory-service:
+    image: hysungzzang/sampoom:factory-latest
+    container_name: factory-service
     env_file:
       - ./env/.env.prod
 
@@ -57,3 +72,7 @@ services:
     container_name: part-service
     env_file:
       - ./env/.env.prod
+
+networks:
+  default:
+    name: sampoom-net
