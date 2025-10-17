@@ -10,6 +10,7 @@ services:
       - /etc/letsencrypt/live/sampoom.store/fullchain.pem:/etc/nginx/certs/fullchain.pem:ro
       - /etc/letsencrypt/live/sampoom.store/privkey.pem:/etc/nginx/certs/privkey.pem:ro
     depends_on:
+      - auth-service
       - warehouse-service
       - agency-service
       - factory-service
@@ -30,6 +31,12 @@ services:
       - agency-service
       - part-service
       - material-service
+
+  auth-service:
+    image: hysungzzang/sampoom:auth-latest
+    container_name: auth-service
+    env_file:
+      - ./env/.env.prod
 
   agency-service:
     image: hysungzzang/sampoom:agency-latest
