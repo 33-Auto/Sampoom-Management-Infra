@@ -24,6 +24,7 @@ services:
     image: hysungzzang/sampoom:swagger-latest
     container_name: swagger
     depends_on:
+      - auth-service
       - order-service
       - user-service
       - warehouse-service
