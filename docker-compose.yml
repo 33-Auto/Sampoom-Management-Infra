@@ -55,9 +55,9 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
       KAFKA_SHARE_COORDINATOR_STATE_TOPIC_REPLICATION_FACTOR: 3
       KAFKA_SHARE_COORDINATOR_STATE_TOPIC_MIN_ISR: 2
-      KAFKA_LOG_DIRS: '/tmp/kraft-combined-logs'
+      KAFKA_LOG_DIRS: '/var/lib/kafka/data'
     volumes:
-      - kafka-1-data:/tmp/kraft-combined-logs
+      - kafka-1-data:/var/lib/kafka/data
 
   kafka-2:
     image: ${KAFKA_IMAGE}
@@ -81,9 +81,9 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
       KAFKA_SHARE_COORDINATOR_STATE_TOPIC_REPLICATION_FACTOR: 3
       KAFKA_SHARE_COORDINATOR_STATE_TOPIC_MIN_ISR: 2
-      KAFKA_LOG_DIRS: '/tmp/kraft-combined-logs'
+      KAFKA_LOG_DIRS: '/var/lib/kafka/data'
     volumes:
-      - kafka-2-data:/tmp/kraft-combined-logs
+      - kafka-2-data:/var/lib/kafka/data
 
   kafka-3:
     image: ${KAFKA_IMAGE}
@@ -107,9 +107,9 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
       KAFKA_SHARE_COORDINATOR_STATE_TOPIC_REPLICATION_FACTOR: 3
       KAFKA_SHARE_COORDINATOR_STATE_TOPIC_MIN_ISR: 2
-      KAFKA_LOG_DIRS: '/tmp/kraft-combined-logs'
+      KAFKA_LOG_DIRS: '/var/lib/kafka/data'
     volumes:
-      - kafka-3-data:/tmp/kraft-combined-logs
+      - kafka-3-data:/var/lib/kafka/data
 
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
