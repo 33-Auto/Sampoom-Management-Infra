@@ -19,6 +19,7 @@ services:
       - order-service
       - material-service
       - part-service
+      - purchase-service
       - swagger
 
   swagger:
@@ -33,6 +34,7 @@ services:
       - agency-service
       - part-service
       - material-service
+      - purchase-service
 
   kafka-1:
     image: ${KAFKA_IMAGE}
