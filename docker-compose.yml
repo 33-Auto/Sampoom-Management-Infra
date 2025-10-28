@@ -19,6 +19,7 @@ services:
       - order-service
       - material-service
       - part-service
+      - purchase-service
       - swagger
 
   swagger:
@@ -33,6 +34,7 @@ services:
       - agency-service
       - part-service
       - material-service
+      - purchase-service
 
   kafka-1:
     image: ${KAFKA_IMAGE}
@@ -171,6 +173,10 @@ services:
     container_name: part-service
     env_file:
       - ./env/.env.prod
+
+  purchase-service:
+    image: hysungzzang/sampoom:purchase-latest
+    container_name: purchase-service
 
 networks:
   default:
