@@ -172,6 +172,10 @@ services:
     env_file:
       - ./env/.env.prod
 
+  purchase-service:
+    image: hysungzzang/sampoom:purchase-latest
+    container_name: purchase-service
+
 networks:
   default:
     name: sampoom-net
