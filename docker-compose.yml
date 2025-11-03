@@ -20,6 +20,7 @@ services:
       - material-service
       - part-service
       - purchase-service
+      - site-service
       - swagger
 
   swagger:
@@ -35,6 +36,7 @@ services:
       - part-service
       - material-service
       - purchase-service
+      - site-service
 
   kafka-1:
     image: ${KAFKA_IMAGE}
@@ -177,6 +179,10 @@ services:
   purchase-service:
     image: hysungzzang/sampoom:purchase-latest
     container_name: purchase-service
+
+  site-service:
+    image: hysungzzang/sampoom:site-latest
+    container_name: site-service
 
 networks:
   default:
